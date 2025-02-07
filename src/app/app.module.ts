@@ -10,6 +10,7 @@ import { ProjectCreateComponent } from './components/project-create/project-crea
 import { ManagementServiceService } from './services/management-service.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { TitleCasePipe } from './pipes/title-case.pipe';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { TitleCasePipe } from './pipes/title-case.pipe';
     NavbarComponent,
     TitleCasePipe,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [ManagementServiceService],
   bootstrap: [AppComponent],
 })

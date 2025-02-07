@@ -1,1 +1,30 @@
-<p>project-create works!</p>
+<div>
+  <h2>Create New Project</h2>
+  <form (ngSubmit)="createProject()">
+    <div>
+      <label>Project Name:</label>
+      <input
+        type="text"
+        [(ngModel)]="projectName"
+        name="projectName"
+        required
+      />
+    </div>
+    <div>
+      <label>Description:</label>
+      <textarea
+        [(ngModel)]="projectDescription"
+        name="projectDescription"
+      ></textarea>
+    </div>
+    <div>
+      <label>Status:</label>
+      <select [(ngModel)]="projectStatus" name="projectStatus">
+        <option value="in-progress">In Progress</option>
+        <option value="completed">Completed</option>
+        <option value="on-hold">On Hold</option>
+      </select>
+    </div>
+    <button type="submit">Create Project</button>
+  </form>
+</div>
