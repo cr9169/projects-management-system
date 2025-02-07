@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
+import { IProject } from '../types';
 
 @Injectable({
   providedIn: 'root',
@@ -88,8 +89,16 @@ export class ManagementServiceService {
     return of(this.projects.find((project) => project.id === id));
   }
 
-  addProject(project: IProject) {
-    this.projects.push(project);
+  addProject() {
+    const newProject: IProject = {
+      id: 11,
+      name: 'פרויקט חדש',
+      description: 'תיאור',
+      status: 'טרם התחיל',
+      dateUpdated: new Date(),
+    };
+
+    this.projects.push(newProject);
     return of(this.projects);
   }
 }
