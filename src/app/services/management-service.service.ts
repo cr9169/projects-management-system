@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ManagementServiceService {
-  project: IProject[] = [
+  projects: IProject[] = [
     {
       id: 1,
       name: 'פיתוח אתר אינטרנט חדש',
@@ -78,4 +79,17 @@ export class ManagementServiceService {
   ];
 
   constructor() {}
+
+  getProjects() {
+    return of(this.projects);
+  }
+
+  getProjectById(id: number) {
+    return of(this.projects.find((project) => project.id === id));
+  }
+
+  addProject(project: IProject) {
+    this.projects.push(project);
+    return of(this.projects);
+  }
 }
