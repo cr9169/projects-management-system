@@ -1,1 +1,67 @@
-/* You can add global styles to this file, and also import other style files */
+/* styles.css */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  min-width: 0;
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  font-family: fantasy;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* תוספת ייחודית לאנגולר - להסתיר את תוכן הקומפוננטה עד שהיא נטענת */
+[hidden] {
+  display: none !important;
+}
+
+/* וודא שrouter-outlet לא יוצר רווחים לא רצויים */
+router-outlet {
+  display: none;
+}
+
+/* סגנון בסיסי ללינקים של router */
+a[routerLink] {
+  text-decoration: none;
+  cursor: pointer;
+}

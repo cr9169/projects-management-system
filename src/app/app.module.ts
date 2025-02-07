@@ -8,6 +8,8 @@ import { ProjectListComponent } from './components/project-list/project-list.com
 import { ProjectDetailComponent } from './components/project-detail/project-detail.component';
 import { ProjectCreateComponent } from './components/project-create/project-create.component';
 import { ManagementServiceService } from './services/management-service.service';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { TitleCasePipe } from './pipes/title-case.pipe';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { ManagementServiceService } from './services/management-service.service'
     ProjectListComponent,
     ProjectDetailComponent,
     ProjectCreateComponent,
+    NavbarComponent,
+    TitleCasePipe,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [ManagementServiceService],
