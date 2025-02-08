@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription, switchMap } from 'rxjs';
 import { IProject } from '../../types';
 import { ActivatedRoute } from '@angular/router';
 import { ManagementServiceService } from '../../services/management-service.service';
@@ -10,27 +10,16 @@ import { ManagementServiceService } from '../../services/management-service.serv
   templateUrl: './project-detail.component.html',
   styleUrl: './project-detail.component.scss',
 })
-export class ProjectDetailComponent implements OnInit, OnDestroy {
-  project?: IProject;
-  private routeSub!: Subscription;
+export class ProjectDetailComponent {
+  project$: Observable<IProject | undefined>;
 
   constructor(
     private route: ActivatedRoute,
     private projectService: ManagementServiceService
-  ) {}
-
-  ngOnInit() {
-    this.routeSub = this.route.params.subscribe((params) => {
-      const id = +params['id'];
-      this.projectService.getProjectById(id).subscribe((proj) => {
-        this.project = proj;
-      });
-    });
-  }
-
-  ngOnDestroy() {
-    if (this.routeSub) {
-      this.routeSub.unsubscribe();
-    }
+  ) {
+    // מאחדים נתיב לנתונים בעזרת switchMap
+    this.project$ = this.route.params.pipe(
+      switchMap((params) => this.projectService.getProjectById(+params['id']))
+    );
   }
 }

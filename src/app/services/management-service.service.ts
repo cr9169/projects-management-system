@@ -91,15 +91,7 @@ export class ManagementServiceService {
     return of(this.projects.find((project) => project.id === id));
   }
 
-  addProject() {
-    const newProject: IProject = {
-      id: 11,
-      name: 'New Project',
-      description: 'Description',
-      status: 'not_started',
-      dateUpdated: new Date(),
-    };
-
+  addProject(newProject: IProject) {
     this.projects.push(newProject);
     return of(this.projects);
   }

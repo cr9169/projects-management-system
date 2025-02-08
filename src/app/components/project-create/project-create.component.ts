@@ -21,14 +21,14 @@ export class ProjectCreateComponent {
 
   createProject() {
     const newProject: IProject = {
-      id: 0, // יוקצה אוטומטית
+      id: 0,
       name: this.projectName,
       description: this.projectDescription,
       status: this.projectStatus,
       dateUpdated: new Date(),
     };
 
-    this.projectService.addProject().subscribe((proj) => {
+    this.projectService.addProject(newProject).subscribe((proj) => {
       console.log('Project created:', proj);
       this.router.navigate(['/projects']);
     });

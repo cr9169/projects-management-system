@@ -1,4 +1,4 @@
-<div *ngIf="project">
+<div *ngIf="project$ | async as project; else noData">
   <h2>Project Detail</h2>
   <h3>{{ project.name | titleCase }}</h3>
   <p><strong>Description:</strong> {{ project.description }}</p>
@@ -7,3 +7,7 @@
     <strong>Last Updated:</strong> {{ project.dateUpdated | date : "medium" }}
   </p>
 </div>
+
+<ng-template #noData>
+  <p>No project data available.</p>
+</ng-template>
