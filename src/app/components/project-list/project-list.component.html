@@ -1,8 +1,13 @@
 <div>
   <h2>Project List</h2>
-  <input type="text" [(ngModel)]="searchText" placeholder="Search projects" />
+  <input
+    type="text"
+    [(ngModel)]="searchText"
+    (ngModelChange)="onSearchTextChange()"
+    placeholder="Search projects"
+  />
   <ul>
-    <li *ngFor="let project of projects">
+    <li *ngFor="let project of filteredProjects">
       <a [routerLink]="['/projects', project.id]">
         {{ project.name | titleCase }}
       </a>

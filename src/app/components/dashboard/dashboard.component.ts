@@ -15,7 +15,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.projectService.getProjects().subscribe((data) => {
-      // לדוגמה, נציג את 3 הפרויקטים האחרונים
       this.recentProjects = data.slice(-3);
     });
   }

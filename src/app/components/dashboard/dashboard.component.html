@@ -1,13 +1,12 @@
 <div>
-    <h2>Dashboard</h2>
-    <h3>Recent Projects</h3>
-    <ul>
-      <li *ngFor="let project of recentProjects">
-        <a [routerLink]="['/projects', project.id]">
-          {{ project.name | titleCase }}
-        </a>
-        - Status: {{ project.status }}
-      </li>
-    </ul>
-  </div>
-  
+  <h2>Dashboard</h2>
+  <h3>Recent Projects</h3>
+  <ul>
+    <li *ngFor="let project of recentProjects">
+      <a [routerLink]="'/projects/' + project.id">
+        {{ project.name | titleCase }}
+      </a>
+      - Status: {{ project.status }}
+    </li>
+  </ul>
+</div>

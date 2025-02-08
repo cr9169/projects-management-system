@@ -10,6 +10,7 @@ import { ManagementServiceService } from '../../services/management-service.serv
 })
 export class ProjectListComponent implements OnInit {
   projects: IProject[] = [];
+  filteredProjects: IProject[] = [];
   searchText: string = '';
 
   constructor(private projectService: ManagementServiceService) {}
@@ -21,6 +22,13 @@ export class ProjectListComponent implements OnInit {
   loadProjects() {
     this.projectService.getProjects().subscribe((data) => {
       this.projects = data;
+      this.filteredProjects = data;
     });
+  }
+
+  onSearchTextChange() {
+    this.filteredProjects = this.projects.filter((project) =>
+      project.name.toLowerCase().includes(this.searchText.toLowerCase())
+    );
   }
 }
