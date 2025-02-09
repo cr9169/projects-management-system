@@ -11,13 +11,23 @@
     </li>
   </ul>
 
-  @defer (on viewport) {
-  <ng-container *ngTemplateOutlet="flagIsTrue"></ng-container>
-  } @placeholder {
-  <div>Preparing content...</div>
-  } @loading {
-  <div>Loading content...</div>
-  }
+  <!-- הצגת הודעת שגיאה במקרה של כשל -->
+  <div *ngIf="errorMessage" class="error">
+    {{ errorMessage }}
+  </div>
+
+  <!-- הצגת התוכן הדחוי רק אם אין שגיאה -->
+  <ng-container *ngIf="!errorMessage">
+    @defer (on viewport) {
+    <ng-container *ngTemplateOutlet="flagIsTrue"></ng-container>
+    } @placeholder {
+    <div>Preparing content...</div>
+    } @loading {
+    <div>Loading content...</div>
+    } @error {
+    <div>Error loading content. Please try again later.</div>
+    }
+  </ng-container>
 </div>
 
 <ng-template #flagIsTrue>

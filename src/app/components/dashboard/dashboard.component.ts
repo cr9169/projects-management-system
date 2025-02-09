@@ -10,14 +10,21 @@ import { ManagementServiceService } from '../../services/management-service.serv
 })
 export class DashboardComponent implements OnInit {
   recentProjects: IProject[] = [];
-
-  flag: boolean = true;
+  errorMessage: string = '';
 
   constructor(private projectService: ManagementServiceService) {}
 
   ngOnInit() {
-    this.projectService.getProjects().subscribe((data) => {
-      this.recentProjects = data.slice(-14);
+    this.projectService.getProjects().subscribe({
+      next: (data: IProject[]) => {
+        if (data) {
+          this.recentProjects = data.slice(-14);
+        }
+      },
+      error: (error) => {
+        console.error('An error occurred:', error);
+        this.errorMessage = 'Failed to load projects. Please try again later.';
+      },
     });
   }
 }
