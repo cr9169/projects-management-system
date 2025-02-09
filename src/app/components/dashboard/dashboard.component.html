@@ -1,5 +1,6 @@
 <div>
   <h2>Dashboard</h2>
+  <p>Welcome To Project Management App!!!</p>
   <h3>Recent Projects</h3>
   <ul>
     <li *ngFor="let project of recentProjects">
@@ -9,4 +10,16 @@
       - Status: {{ project.status }}
     </li>
   </ul>
+
+  @defer (on viewport) {
+  <ng-container *ngTemplateOutlet="flagIsTrue"></ng-container>
+  } @placeholder {
+  <div>Preparing content...</div>
+  } @loading {
+  <div>Loading content...</div>
+  }
 </div>
+
+<ng-template #flagIsTrue>
+  <div class="custom-style">Hiiiiiiiiiiiiiiiiiiiiiiiiiii!</div>
+</ng-template>

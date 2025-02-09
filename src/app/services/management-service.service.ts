@@ -79,6 +79,62 @@ export class ManagementServiceService {
       status: 'not_started',
       dateUpdated: new Date('2025-02-02'),
     },
+    {
+      id: 11,
+      name: 'Team Training',
+      description: 'Series of professional training for development team',
+      status: 'not_started',
+      dateUpdated: new Date('2025-02-02'),
+    },
+    {
+      id: 12,
+      name: 'Team Training',
+      description: 'Series of professional training for development team',
+      status: 'not_started',
+      dateUpdated: new Date('2025-02-02'),
+    },
+    {
+      id: 13,
+      name: 'Team Training',
+      description: 'Series of professional training for development team',
+      status: 'not_started',
+      dateUpdated: new Date('2025-02-02'),
+    },
+    {
+      id: 14,
+      name: 'Team Training',
+      description: 'Series of professional training for development team',
+      status: 'not_started',
+      dateUpdated: new Date('2025-02-02'),
+    },
+    {
+      id: 15,
+      name: 'Team Training',
+      description: 'Series of professional training for development team',
+      status: 'not_started',
+      dateUpdated: new Date('2025-02-02'),
+    },
+    {
+      id: 16,
+      name: 'Team Training',
+      description: 'Series of professional training for development team',
+      status: 'not_started',
+      dateUpdated: new Date('2025-02-02'),
+    },
+    {
+      id: 17,
+      name: 'Team Training',
+      description: 'Series of professional training for development team',
+      status: 'not_started',
+      dateUpdated: new Date('2025-02-02'),
+    },
+    {
+      id: 18,
+      name: 'Team Training',
+      description: 'Series of professional training for development team',
+      status: 'not_started',
+      dateUpdated: new Date('2025-02-02'),
+    },
   ];
 
   constructor() {}

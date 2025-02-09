@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // <-- ייבוא חשוב!
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +12,7 @@ import { ManagementServiceService } from './services/management-service.service'
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { TitleCasePipe } from './pipes/title-case.pipe';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -22,8 +24,17 @@ import { FormsModule } from '@angular/forms';
     NavbarComponent,
     TitleCasePipe,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
-  providers: [ManagementServiceService],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule, // <-- חובה כדי לתמוך ב־@defer או אנימציות אחרות
+    AppRoutingModule,
+    FormsModule,
+    CommonModule,
+  ],
+  providers: [
+    ManagementServiceService,
+    // אין צורך ב־ provideAnimations() בגישה הזאת
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

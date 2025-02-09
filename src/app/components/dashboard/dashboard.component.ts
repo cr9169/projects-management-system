@@ -11,11 +11,13 @@ import { ManagementServiceService } from '../../services/management-service.serv
 export class DashboardComponent implements OnInit {
   recentProjects: IProject[] = [];
 
+  flag: boolean = true;
+
   constructor(private projectService: ManagementServiceService) {}
 
   ngOnInit() {
     this.projectService.getProjects().subscribe((data) => {
-      this.recentProjects = data.slice(-3);
+      this.recentProjects = data.slice(-14);
     });
   }
 }
