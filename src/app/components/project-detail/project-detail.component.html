@@ -1,14 +1,41 @@
 <div>
   @if (project()) {
-    <h2>Project Detail</h2>
-    <h3>{{ project()!.name | titleCase }}</h3>
-    <p><strong>Description:</strong> {{ project()!.description }}</p>
-    <p><strong>Status:</strong> {{ project()!.status }}</p>
-    <p>
-      <strong>Last Updated:</strong>
-      {{ project()!.dateUpdated | date: "medium" }}
-    </p>
+    <div class="project-card">
+      <h2>Project Details</h2>
+      <div class="project-header">
+        <h3>{{ project()!.name | titleCase }}</h3>
+        <span class="status" [class]="'status-' + project()!.status">
+          {{ project()!.status | titleCase }}
+        </span>
+      </div>
+
+      <div class="project-content">
+        <div class="detail-section">
+          <h4>Description</h4>
+          <p>{{ project()!.description }}</p>
+        </div>
+
+        <div class="detail-section">
+          <h4>Status</h4>
+          <p>{{ project()!.status | titleCase }}</p>
+        </div>
+
+        <div class="detail-section">
+          <h4>Last Updated</h4>
+          <p>{{ project()!.dateUpdated | date: "medium" }}</p>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn-secondary" routerLink="/projects">
+          Back to Projects
+        </button>
+      </div>
+    </div>
   } @else {
-    <p>No project data available.</p>
+    <div class="empty-state">
+      <p>No project data available.</p>
+      <button routerLink="/projects">Back to Projects</button>
+    </div>
   }
 </div>

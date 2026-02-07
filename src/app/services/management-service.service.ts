@@ -140,7 +140,7 @@ export class ManagementServiceService {
   constructor() {}
 
   getProjects() {
-    return of(this.projects).pipe(delay(1000));
+    return of(this.projects).pipe(delay(100));
   }
 
   getProjectById(id: number) {
