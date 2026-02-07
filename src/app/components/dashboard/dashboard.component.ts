@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal, DestroyRef, inject } from '@angular/core';
 import { IProject } from '../../types';
 import { ManagementServiceService } from '../../services/management-service.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,22 +10,30 @@ import { ManagementServiceService } from '../../services/management-service.serv
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent implements OnInit {
-  recentProjects: IProject[] = [];
-  errorMessage: string = '';
+  private destroyRef = inject(DestroyRef);
+  
+  recentProjects = signal<IProject[]>([]);
+  errorMessage = signal<string>('');
+  isLoading = signal<boolean>(false);
 
   constructor(private projectService: ManagementServiceService) {}
 
   ngOnInit() {
-    this.projectService.getProjects().subscribe({
-      next: (data: IProject[]) => {
-        if (data) {
-          this.recentProjects = data.slice(-14);
+    this.isLoading.set(true);
+    this.projectService.getProjects()
+      .pipe(
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe({
+        next: (projects) => {
+          this.recentProjects.set(projects);
+          this.errorMessage.set('');
+          this.isLoading.set(false);
+        },
+        error: (error) => {
+          this.errorMessage.set(error.message || 'Failed to load projects');
+          this.isLoading.set(false);
         }
-      },
-      error: (error) => {
-        console.error('An error occurred:', error);
-        this.errorMessage = 'Failed to load projects. Please try again later.';
-      },
-    });
+      });
   }
 }

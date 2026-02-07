@@ -5,15 +5,46 @@
     gap: 4rem;
 
     ul {
-      display: flex;
-      flex-direction: column;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      padding-inline: 1rem;
       gap: 2rem;
+
+      > li.project-card {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 0.5rem;
+        padding: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+
+        &:hover {
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          transform: scale(1.1);
+          transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+        }
+
+        a {
+          font-size: 1.25rem;
+          font-weight: bold;
+          color: #007bff;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        .status {
+          font-size: 0.875rem;
+          color: #666;
+        }
+      }
     }
   }
-}
-
-.custom-style {
-  width: 20rem;
-  aspect-ratio: 1;
-  background-color: aquamarine;
 }

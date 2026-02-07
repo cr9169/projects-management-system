@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { of, throwError } from 'rxjs';
+import { of, throwError, delay } from 'rxjs';
 import { IProject } from '../types';
 
 @Injectable({
@@ -140,7 +140,10 @@ export class ManagementServiceService {
   constructor() {}
 
   getProjects() {
-    return of(this.projects);
+    // Simulate fetching all projects with a 1 second delay
+    return of(this.projects).pipe(
+      delay(1000)
+    );
   }
 
   getProjectById(id: number) {

@@ -1,35 +1,26 @@
 <div>
   <h2>Dashboard</h2>
   <p>Welcome To Project Management App!!!</p>
-  <h3>Recent Projects</h3>
-  <ul>
-    <li *ngFor="let project of recentProjects">
-      <a [routerLink]="'/projects/' + project.id">
-        {{ project.name | titleCase }}
-      </a>
-      - Status: {{ project.status }}
-    </li>
-  </ul>
-
-  <!-- הצגת הודעת שגיאה במקרה של כשל -->
-  <div *ngIf="errorMessage" class="error">
-    {{ errorMessage }}
-  </div>
-
-  <!-- הצגת התוכן הדחוי רק אם אין שגיאה -->
-  <ng-container *ngIf="!errorMessage">
-    @defer (on viewport) {
-    <ng-container *ngTemplateOutlet="flagIsTrue"></ng-container>
-    } @placeholder {
-    <div>Preparing content...</div>
-    } @loading {
-    <div>Loading content...</div>
-    } @error {
-    <div>Error loading content. Please try again later.</div>
-    }
-  </ng-container>
+  
+  @if (errorMessage()) {
+    <div class="error">
+      {{ errorMessage() }}
+    </div>
+  } @else if (isLoading()) {
+    <div class="spinner">
+      <p>Loading projects...</p>
+    </div>
+  } @else {
+    <h3>Recent Projects</h3>
+    <ul>
+      @for (project of recentProjects(); track project.id) {
+        <li class="project-card">
+          <a [routerLink]="'/projects/' + project.id">
+            {{ project.name | titleCase }}
+          </a>
+          - Status: {{ project.status }}
+        </li>
+      }
+    </ul>
+  }
 </div>
-
-<ng-template #flagIsTrue>
-  <div class="custom-style">Hiiiiiiiiiiiiiiiiiiiiiiiiiii!</div>
-</ng-template>
