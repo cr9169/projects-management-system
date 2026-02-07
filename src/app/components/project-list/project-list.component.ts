@@ -1,6 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  signal,
+  computed,
+  DestroyRef,
+  inject,
+} from '@angular/core';
 import { IProject } from '../../types';
 import { ManagementServiceService } from '../../services/management-service.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-project-list',
@@ -9,9 +17,15 @@ import { ManagementServiceService } from '../../services/management-service.serv
   styleUrl: './project-list.component.scss',
 })
 export class ProjectListComponent implements OnInit {
-  projects: IProject[] = [];
-  filteredProjects: IProject[] = [];
-  searchText: string = '';
+  private destroyRef = inject(DestroyRef);
+
+  projects = signal<IProject[]>([]);
+  searchText = signal<string>('');
+  filteredProjects = computed(() =>
+    this.projects().filter((project) =>
+      project.name.toLowerCase().includes(this.searchText().toLowerCase()),
+    ),
+  );
 
   constructor(private projectService: ManagementServiceService) {}
 
@@ -20,15 +34,11 @@ export class ProjectListComponent implements OnInit {
   }
 
   loadProjects() {
-    this.projectService.getProjects().subscribe((data) => {
-      this.projects = data;
-      this.filteredProjects = data;
-    });
-  }
-
-  onSearchTextChange() {
-    this.filteredProjects = this.projects.filter((project) =>
-      project.name.toLowerCase().includes(this.searchText.toLowerCase())
-    );
+    this.projectService
+      .getProjects()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((data) => {
+        this.projects.set(data);
+      });
   }
 }

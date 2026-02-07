@@ -31,10 +31,7 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     CommonModule,
   ],
-  providers: [
-    ManagementServiceService,
-    // אין צורך ב־ provideAnimations() בגישה הזאת
-  ],
+  providers: [ManagementServiceService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -140,10 +140,7 @@ export class ManagementServiceService {
   constructor() {}
 
   getProjects() {
-    // Simulate fetching all projects with a 1 second delay
-    return of(this.projects).pipe(
-      delay(1000)
-    );
+    return of(this.projects).pipe(delay(1000));
   }
 
   getProjectById(id: number) {

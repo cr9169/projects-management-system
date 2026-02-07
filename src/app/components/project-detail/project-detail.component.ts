@@ -1,8 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription, switchMap } from 'rxjs';
+import { Component, signal, DestroyRef, inject, OnInit } from '@angular/core';
+import { switchMap } from 'rxjs';
 import { IProject } from '../../types';
 import { ActivatedRoute } from '@angular/router';
 import { ManagementServiceService } from '../../services/management-service.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-project-detail',
@@ -10,16 +11,23 @@ import { ManagementServiceService } from '../../services/management-service.serv
   templateUrl: './project-detail.component.html',
   styleUrl: './project-detail.component.scss',
 })
-export class ProjectDetailComponent {
-  project$: Observable<IProject | undefined>;
+export class ProjectDetailComponent implements OnInit {
+  private destroyRef = inject(DestroyRef);
+  private route = inject(ActivatedRoute);
+  private projectService = inject(ManagementServiceService);
 
-  constructor(
-    private route: ActivatedRoute,
-    private projectService: ManagementServiceService
-  ) {
-    // מאחדים נתיב לנתונים בעזרת switchMap
-    this.project$ = this.route.params.pipe(
-      switchMap((params) => this.projectService.getProjectById(+params['id']))
-    );
+  project = signal<IProject | undefined>(undefined);
+
+  ngOnInit() {
+    this.route.params
+      .pipe(
+        switchMap((params) =>
+          this.projectService.getProjectById(+params['id']),
+        ),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe((data) => {
+        this.project.set(data);
+      });
   }
 }
