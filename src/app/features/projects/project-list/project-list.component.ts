@@ -6,13 +6,18 @@ import {
   DestroyRef,
   inject,
 } from '@angular/core';
-import { IProject } from '../../types';
-import { ManagementServiceService } from '../../services/management-service.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { IProject } from '../../../types';
+import { ManagementServiceService } from '../../../services/management-service.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TitleCasePipe } from '../../../shared/pipes/title-case.pipe';
 
 @Component({
   selector: 'app-project-list',
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule, TitleCasePipe],
   templateUrl: './project-list.component.html',
   styleUrl: './project-list.component.scss',
 })
@@ -40,5 +45,9 @@ export class ProjectListComponent implements OnInit {
       .subscribe((data) => {
         this.projects.set(data);
       });
+  }
+
+  onSearchChange(value: string) {
+    this.searchText.set(value);
   }
 }

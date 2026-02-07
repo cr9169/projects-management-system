@@ -1,7 +1,7 @@
 <div>
   <h2>Dashboard</h2>
   <p>Welcome To Project Management App!!!</p>
-  
+
   @if (errorMessage()) {
     <div class="error">
       {{ errorMessage() }}
@@ -14,12 +14,7 @@
     <h3>Recent Projects</h3>
     <ul>
       @for (project of recentProjects(); track project.id) {
-        <li class="project-card">
-          <a [routerLink]="'/projects/' + project.id">
-            {{ project.name | titleCase }}
-          </a>
-          - Status: {{ project.status }}
-        </li>
+        <app-project-card [project]="project"></app-project-card>
       }
     </ul>
   }

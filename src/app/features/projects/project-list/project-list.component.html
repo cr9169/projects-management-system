@@ -3,7 +3,7 @@
   <input
     type="text"
     [ngModel]="searchText()"
-    (ngModelChange)="searchText.set($event)"
+    (ngModelChange)="onSearchChange($event)"
     placeholder="Search projects"
   />
   <ul>

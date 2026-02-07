@@ -1,0 +1,9 @@
+<div>
+  <label>{{ label }}</label>
+  <textarea
+    [(ngModel)]="value"
+    [attr.name]="label.toLowerCase().replace(' ', '-')"
+    [placeholder]="placeholder"
+    required
+  ></textarea>
+</div>

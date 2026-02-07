@@ -1,0 +1,16 @@
+:host {
+  > div:nth-child(1) {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+
+    ul {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      padding-inline: 1rem;
+      gap: 2rem;
+      list-style: none;
+    }
+  }
+}

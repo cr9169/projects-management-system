@@ -1,12 +1,25 @@
 import { Component, signal, DestroyRef, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { ManagementServiceService } from '../../services/management-service.service';
-import { IProject } from '../../types';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
+import { ManagementServiceService } from '../../../services/management-service.service';
+import { IProject } from '../../../types';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormInputComponent } from '../../../shared/components/form-input/form-input.component';
+import { FormTextareaComponent } from '../../../shared/components/form-textarea/form-textarea.component';
+import { FormSelectComponent } from '../../../shared/components/form-select/form-select.component';
 
 @Component({
   selector: 'app-project-create',
-  standalone: false,
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    FormInputComponent,
+    FormTextareaComponent,
+    FormSelectComponent,
+  ],
   templateUrl: './project-create.component.html',
   styleUrl: './project-create.component.scss',
 })
@@ -18,6 +31,12 @@ export class ProjectCreateComponent {
   projectName = signal<string>('');
   projectDescription = signal<string>('');
   projectStatus = signal<string>('in_progress');
+
+  statusOptions = [
+    { value: 'in_progress', label: 'In Progress' },
+    { value: 'completed', label: 'Completed' },
+    { value: 'on_hold', label: 'On Hold' },
+  ];
 
   createProject() {
     const name = this.projectName().trim();

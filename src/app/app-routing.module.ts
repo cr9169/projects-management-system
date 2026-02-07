@@ -1,11 +1,10 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ProjectListComponent } from './components/project-list/project-list.component';
-import { ProjectCreateComponent } from './components/project-create/project-create.component';
-import { ProjectDetailComponent } from './components/project-detail/project-detail.component';
+import { Routes } from '@angular/router';
+import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { ProjectListComponent } from './features/projects/project-list/project-list.component';
+import { ProjectCreateComponent } from './features/projects/project-create/project-create.component';
+import { ProjectDetailComponent } from './features/projects/project-detail/project-detail.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     redirectTo: '/dashboard',
@@ -28,9 +27,3 @@ const routes: Routes = [
     component: ProjectDetailComponent,
   },
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}

@@ -1,0 +1,10 @@
+<div>
+  <label>{{ label }}</label>
+  <input
+    type="text"
+    [(ngModel)]="value"
+    [attr.name]="label.toLowerCase().replace(' ', '-')"
+    [placeholder]="placeholder"
+    required
+  />
+</div>

@@ -1,0 +1,13 @@
+<div>
+  <label>{{ label }}</label>
+  <select
+    [(ngModel)]="value"
+    [attr.name]="label.toLowerCase().replace(' ', '-')"
+    required
+  >
+    <option value="">-- Select {{ label }} --</option>
+    @for (option of options; track option.value) {
+      <option [value]="option.value">{{ option.label }}</option>
+    }
+  </select>
+</div>
